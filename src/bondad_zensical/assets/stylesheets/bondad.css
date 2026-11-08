@@ -241,6 +241,12 @@
   color: var(--bondad-fg);
 }
 
+/* Blog index: excerpts in the muted colour, so post titles stand out
+   without more coral. Links, code and admonitions keep their own colours. */
+[data-md-color-scheme^="bondad-"] .md-post--excerpt .md-post__content {
+  color: var(--bondad-muted);
+}
+
 /* Blog: the draft badge is hard-coded white on #ff1744 upstream. */
 [data-md-color-scheme^="bondad-"] .md-draft {
   color: var(--bondad-on-primary);

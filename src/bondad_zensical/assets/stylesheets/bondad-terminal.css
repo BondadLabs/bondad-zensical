@@ -46,6 +46,23 @@
   }
 }
 
+/* Blog index: post titles in the heading colour behind a coral prompt, as
+   on the page title. The whole title turns coral on hover and focus. */
+[data-md-color-scheme^="bondad-"] .md-post--excerpt .md-post__content > :first-child > .toclink {
+  color: var(--bondad-fg);
+  transition: color 125ms;
+}
+
+[data-md-color-scheme^="bondad-"] .md-post--excerpt .md-post__content > :first-child > .toclink::before {
+  content: "> ";
+  color: var(--md-primary-fg-color);
+}
+
+[data-md-color-scheme^="bondad-"] .md-post--excerpt .md-post__content > :first-child > .toclink:hover,
+[data-md-color-scheme^="bondad-"] .md-post--excerpt .md-post__content > :first-child > .toclink:focus-visible {
+  color: var(--md-accent-fg-color);
+}
+
 /* Text selection in the brand colour. */
 [data-md-color-scheme^="bondad-"] ::selection {
   background: var(--md-accent-fg-color--transparent);

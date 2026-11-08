@@ -64,7 +64,7 @@ terminal = false
 
 | Option | Default | Effect |
 |--------|---------|--------|
-| `terminal` | `true` | Mono, extra-bold `h1` to `h3`; coral `> ` before the page title; blinking `_` cursor after the site name in the header; brand-coloured text selection. Set to `false` for a plain recolour. |
+| `terminal` | `true` | Mono, extra-bold `h1` to `h3`; coral `> ` before the page title and before each post title on a blog index (titles in the heading colour, coral on hover); blinking `_` cursor after the site name in the header; brand-coloured text selection. Set to `false` for a plain recolour. |
 
 The accents only apply under the Bondad schemes. The cursor stops blinking
 when the reader prefers reduced motion.
