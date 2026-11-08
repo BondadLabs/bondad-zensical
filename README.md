@@ -9,13 +9,51 @@ Needs Zensical 0.1.0 or later (Python 3.11+).
 
 ## Install
 
-From a built wheel or a checkout of this repository:
+The theme installs straight from this repository:
 
 ```sh
-uv add path/to/bondad_zensical-0.1.0-py3-none-any.whl
-# or
-uv add path/to/Bondad-Zensical
+uv add git+https://github.com/BondadLabs/bondad-zensical
 ```
+
+or with pip:
+
+```sh
+pip install "bondad-zensical @ git+https://github.com/BondadLabs/bondad-zensical"
+```
+
+That tracks `main`. For reproducible site builds, pin a commit (or a tag,
+once there are releases):
+
+```sh
+uv add git+https://github.com/BondadLabs/bondad-zensical --rev <commit-sha>
+uv add git+https://github.com/BondadLabs/bondad-zensical --tag <tag>
+```
+
+`uv lock --upgrade-package bondad-zensical` moves an unpinned install to the
+latest `main`.
+
+### Access
+
+The repository is private, so git needs GitHub credentials to fetch it.
+
+- **Locally:** run `gh auth setup-git` once, so git uses your `gh` login.
+  Alternatively, install over SSH:
+  `uv add git+ssh://git@github.com/BondadLabs/bondad-zensical`.
+- **In CI:** a site's own `GITHUB_TOKEN` can't read another private repo.
+  Create a fine-grained token with read-only *Contents* access to
+  `BondadLabs/bondad-zensical`, store it as a secret (e.g. `BONDAD_THEME_TOKEN`),
+  and point git at it before installing:
+
+  ```yaml
+  - run: |
+      git config --global url."https://x-access-token:${TOKEN}@github.com/BondadLabs/".insteadOf "https://github.com/BondadLabs/"
+      uv sync
+    env:
+      TOKEN: ${{ secrets.BONDAD_THEME_TOKEN }}
+  ```
+
+  The rewrite keeps the token out of `pyproject.toml` and `uv.lock`, which
+  only ever hold the plain `https://github.com/...` URL.
 
 ## Enable
 

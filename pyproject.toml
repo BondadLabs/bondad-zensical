@@ -13,6 +13,9 @@ classifiers = [
   "Topic :: Documentation",
 ]
 
+[project.urls]
+Repository = "https://github.com/BondadLabs/bondad-zensical"
+
 # Zensical finds installed themes through this entry-point group.
 [project.entry-points."mkdocs.themes"]
 bondad = "bondad_zensical"
