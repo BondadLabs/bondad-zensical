@@ -32,28 +32,13 @@ uv add git+https://github.com/BondadLabs/bondad-zensical --tag <tag>
 `uv lock --upgrade-package bondad-zensical` moves an unpinned install to the
 latest `main`.
 
-### Access
+In CI, install from the lockfile so the build uses the pinned theme commit:
 
-The repository is private, so git needs GitHub credentials to fetch it.
-
-- **Locally:** run `gh auth setup-git` once, so git uses your `gh` login.
-  Alternatively, install over SSH:
-  `uv add git+ssh://git@github.com/BondadLabs/bondad-zensical`.
-- **In CI:** a site's own `GITHUB_TOKEN` can't read another private repo.
-  Create a fine-grained token with read-only *Contents* access to
-  `BondadLabs/bondad-zensical`, store it as a secret (e.g. `BONDAD_THEME_TOKEN`),
-  and point git at it before installing:
-
-  ```yaml
-  - run: |
-      git config --global url."https://x-access-token:${TOKEN}@github.com/BondadLabs/".insteadOf "https://github.com/BondadLabs/"
-      uv sync
-    env:
-      TOKEN: ${{ secrets.BONDAD_THEME_TOKEN }}
-  ```
-
-  The rewrite keeps the token out of `pyproject.toml` and `uv.lock`, which
-  only ever hold the plain `https://github.com/...` URL.
+```yaml
+- uses: astral-sh/setup-uv@v10
+- run: uv sync --frozen
+- run: uv run zensical build --clean
+```
 
 ## Enable
 
