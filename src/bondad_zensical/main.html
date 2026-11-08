@@ -1,0 +1,26 @@
+{#-
+  Bondad theme. Sites that override main.html themselves should copy the
+  two blocks below into their override, or the theme's CSS won't load.
+-#}
+{% extends "base.html" %}
+
+{% set bondad = config.extra.bondad or {} %}
+{% set terminal = bondad.terminal != false %}
+
+{% block fonts %}
+  {{ super() }}
+  {#- The terminal headings use the mono face at 800, which the default
+      font request (400 and 700 only) doesn't include. -#}
+  {% if terminal and config.theme.font != false and config.theme.font.code %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family={{
+        config.theme.font.code | replace(' ', '+') }}:800&amp;display=fallback">
+  {% endif %}
+{% endblock %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ 'assets/stylesheets/bondad.css' | url }}">
+  {% if terminal %}
+    <link rel="stylesheet" href="{{ 'assets/stylesheets/bondad-terminal.css' | url }}">
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,51 @@
+# Demo site for the bondad theme. Every page under docs/ exists to show a
+# component in both schemes; build it with `uv run zensical serve`.
+#
+# Note what's missing: no extra_css, palette, font, favicon or logo. The
+# theme supplies all of them.
+
+[project]
+site_name = "bondad"
+site_description = "Demo and reference for the bondad Zensical theme."
+site_author = "Ehsan Aliakbar"
+copyright = "© 2026 Ehsan Aliakbar"
+
+nav = [
+  { "Home" = "index.md" },
+  { "Typography" = "typography.md" },
+  { "Admonitions" = "admonitions.md" },
+  { "Code" = "code.md" },
+  { "Diagrams" = "diagrams.md" },
+  { "Blog" = "blog/index.md" },
+]
+
+# Blog demo: three posts per page so pagination shows with only a few posts.
+[project.plugins.blog]
+pagination_per_page = 3
+
+[project.plugins.tags]
+
+[project.theme]
+name = "bondad"
+features = [
+  "content.code.annotate",
+  "content.code.copy",
+  "content.tabs.link",
+  "navigation.footer",
+  "navigation.instant",
+  "navigation.top",
+  "navigation.tracking",
+  "search.highlight",
+]
+
+# Uncomment for a plain recolour without the mono headings, prompt and cursor.
+# [project.extra.bondad]
+# terminal = false
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/EAliakbar"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/linkedin"
+link = "https://www.linkedin.com/in/ealiakbar/"

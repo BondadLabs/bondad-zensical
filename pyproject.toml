@@ -1,0 +1,22 @@
+[project]
+name = "bondad-zensical"
+version = "0.1.0"
+description = "Bondad: a Zensical theme with the bondad.org colour schemes"
+readme = "README.md"
+authors = [{ name = "Ehsan Aliakbar" }]
+requires-python = ">=3.11"
+dependencies = ["zensical>=0.1.0"]
+keywords = ["zensical", "theme", "documentation"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3",
+  "Topic :: Documentation",
+]
+
+# Zensical finds installed themes through this entry-point group.
+[project.entry-points."mkdocs.themes"]
+bondad = "bondad_zensical"
+
+[build-system]
+requires = ["uv_build>=0.11.8,<0.14.0"]
+build-backend = "uv_build"

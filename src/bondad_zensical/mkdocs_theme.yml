@@ -1,0 +1,40 @@
+# Bondad theme for Zensical (tested with zensical 0.1.0).
+#
+# Zensical maps `material` (and `zensical`) to its built-in theme, so this
+# inherits every built-in template, asset and default.
+extends: material
+
+# Defaults only: a site that sets any of these in [project.theme] replaces
+# the whole key (e.g. a site palette replaces this palette entirely).
+favicon: assets/images/favicon.svg
+logo: assets/images/logo.svg
+
+font:
+  text: Inter
+  code: JetBrains Mono
+
+palette:
+  # The scheme on this entry is only what <body> starts with before the JS
+  # resolves the system preference (and the fallback without JS). Without
+  # it, that first paint would be Zensical's `default` scheme in indigo.
+  - media: "(prefers-color-scheme)"
+    scheme: bondad-dark
+    primary: custom
+    accent: custom
+    toggle:
+      icon: lucide/sun-moon
+      name: Switch to light mode
+  - media: "(prefers-color-scheme: light)"
+    scheme: bondad-light
+    primary: custom
+    accent: custom
+    toggle:
+      icon: lucide/sun
+      name: Switch to dark mode
+  - media: "(prefers-color-scheme: dark)"
+    scheme: bondad-dark
+    primary: custom
+    accent: custom
+    toggle:
+      icon: lucide/moon
+      name: Switch to system preference

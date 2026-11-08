@@ -1,0 +1,52 @@
+/*
+ * Bondad terminal accents. Loaded by default; turn off with
+ *
+ *   [project.extra.bondad]
+ *   terminal = false
+ *
+ * Scoped to the Bondad schemes, so a site that brings its own palette
+ * doesn't get coral prompts on someone else's colours.
+ */
+
+/* Headings in the mono face, page title prefixed with a coral prompt. */
+[data-md-color-scheme^="bondad-"] .md-typeset h1,
+[data-md-color-scheme^="bondad-"] .md-typeset h2,
+[data-md-color-scheme^="bondad-"] .md-typeset h3 {
+  font-family: var(--md-code-font-family);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+[data-md-color-scheme^="bondad-"] .md-typeset h1::before {
+  content: "> ";
+  color: var(--md-primary-fg-color);
+}
+
+/* Blinking cursor after the site name in the header. It sits on the topic,
+   not on the inner `.md-ellipsis`, whose `overflow: hidden` clips it. */
+[data-md-color-scheme^="bondad-"] .md-header__topic:first-child::after {
+  content: "";
+  flex-shrink: 0;
+  align-self: center;
+  width: 0.55em;
+  height: 0.12em;
+  margin-top: 0.75em;
+  margin-left: 0.08em;
+  background: var(--md-primary-fg-color);
+  animation: bondad-blink 1.1s steps(1) infinite;
+}
+
+@keyframes bondad-blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-md-color-scheme^="bondad-"] .md-header__topic:first-child::after {
+    animation: none;
+  }
+}
+
+/* Text selection in the brand colour. */
+[data-md-color-scheme^="bondad-"] ::selection {
+  background: var(--md-accent-fg-color--transparent);
+}

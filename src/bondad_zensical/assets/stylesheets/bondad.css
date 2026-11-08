@@ -1,0 +1,306 @@
+/*
+ * Bondad colour schemes for Zensical (tested with zensical 0.1.0).
+ *
+ * Layout of this file:
+ *
+ *   1. Schemes  one block of raw `--bondad-*` tokens per scheme. Adding a
+ *               scheme means adding a block here and nothing else, as long
+ *               as its name starts with `bondad-` and ends in `-dark` or
+ *               `-light` (e.g. `bondad-sepia-light`).
+ *   2. Modes    what depends on light vs dark: `color-scheme`, translucent
+ *               tints, shadows, `#only-dark` / `#only-light` images.
+ *   3. Mapping  every Zensical variable, from the tokens. Custom schemes
+ *               inherit nothing from `default` or `slate`, so this sets all
+ *               of what `[data-md-color-scheme=slate]` sets.
+ *   4. Components  admonitions, headings and other non-variable rules.
+ *
+ * Every text colour here is at least 4.5:1 on the background it sits on.
+ */
+
+/* ============================================================ 1. Schemes */
+
+[data-md-color-scheme="bondad-dark"] {
+  --bondad-bg:            #0E1116;
+  --bondad-surface:       #151A22;   /* code blocks, raised panels */
+  --bondad-border:        #262D38;
+  --bondad-fg:            #F2F4F8;   /* headings, UI text */
+  --bondad-text:          #E3E7EE;   /* body copy */
+  --bondad-muted:         #9AA3B2;
+  --bondad-code-fg:       #E3E7EE;
+  --bondad-comment:       #8A93A2;
+
+  --bondad-primary:       #FF6B57;
+  --bondad-primary-light: #FF8A78;
+  --bondad-primary-dark:  #E04B37;
+  --bondad-accent:        #FF8A78;   /* hover */
+  --bondad-on-primary:    #0E1116;   /* text on a primary fill */
+
+  --bondad-keyword:       #FF6B57;
+  --bondad-special:       #FF8A78;
+  --bondad-red:           #FF6B57;
+  --bondad-amber:         #FFB86B;
+  --bondad-green:         #3DDC97;
+  --bondad-blue:          #4CB8FF;
+  --bondad-violet:        #B9A6FF;
+
+  --bondad-footer:        #080A0D;   /* classic variant only */
+  --bondad-footer-dark:   #050608;
+
+  /* The modern variant's JS-rendered UI (search, dialogs) reads these as
+     space-separated RGB triplets. */
+  --color-foreground:        242 244 248;
+  --color-background:        14 17 22;
+  --color-background-subtle: 21 26 34;
+  --color-backdrop:          8 10 13;
+}
+
+[data-md-color-scheme="bondad-light"] {
+  --bondad-bg:            #F6F7F9;
+  --bondad-surface:       #ECEEF2;
+  --bondad-border:        #D9DEE5;
+  --bondad-fg:            #0E1116;
+  --bondad-text:          #0E1116;
+  --bondad-muted:         #4E5663;
+  --bondad-code-fg:       #1F2530;
+  --bondad-comment:       #5F6775;
+
+  /* #D0402C (the logo's light accent) is 4.4:1 on this background, a hair
+     under AA for small text, so links and UI use a deeper shade. */
+  --bondad-primary:       #C0391F;
+  --bondad-primary-light: #D0402C;
+  --bondad-primary-dark:  #A8301F;
+  --bondad-accent:        #B3321F;
+  --bondad-on-primary:    #FFFFFF;
+
+  --bondad-keyword:       #B3321F;
+  --bondad-special:       #A8301F;
+  --bondad-red:           #C0391F;
+  --bondad-amber:         #8F5200;
+  --bondad-green:         #13784F;
+  --bondad-blue:          #0B5FA3;
+  --bondad-violet:        #5B3FB8;
+
+  --bondad-footer:        #0E1116;
+  --bondad-footer-dark:   #080A0D;
+
+  --color-foreground:        14 17 22;
+  --color-background:        246 247 249;
+  --color-background-subtle: 236 238 242;
+  --color-backdrop:          246 247 249;
+}
+
+/* ============================================================== 2. Modes */
+
+[data-md-color-scheme^="bondad-"][data-md-color-scheme$="-dark"] {
+  color-scheme: dark;
+
+  --md-default-bg-color--light:      color-mix(in srgb, var(--bondad-bg) 54%, transparent);
+  --md-default-bg-color--lighter:    color-mix(in srgb, var(--bondad-bg) 26%, transparent);
+  --md-default-bg-color--lightest:   color-mix(in srgb, var(--bondad-bg) 7%, transparent);
+  --md-default-fg-color--lighter:    color-mix(in srgb, var(--bondad-fg) 32%, transparent);
+  --md-default-fg-color--lightest:   color-mix(in srgb, var(--bondad-fg) 8%, transparent);
+  --md-primary-bg-color--light:      color-mix(in srgb, var(--bondad-on-primary) 70%, transparent);
+  --md-accent-bg-color--light:       color-mix(in srgb, var(--bondad-on-primary) 70%, transparent);
+  --md-accent-fg-color--transparent: color-mix(in srgb, var(--bondad-primary) 12%, transparent);
+  --md-code-hl-color:                var(--bondad-primary);
+  --md-code-hl-color--light:         color-mix(in srgb, var(--bondad-primary) 12%, transparent);
+  --md-typeset-mark-color:           color-mix(in srgb, var(--bondad-primary) 25%, transparent);
+  --md-typeset-del-color:            color-mix(in srgb, var(--bondad-red) 22%, transparent);
+  --md-typeset-ins-color:            color-mix(in srgb, var(--bondad-green) 18%, transparent);
+  --md-typeset-table-color--light:   color-mix(in srgb, var(--bondad-fg) 4%, transparent);
+  --bondad-admonition-tint:          10%;
+
+  --md-shadow-z1: 0 0.2rem 0.5rem #0000000d, 0 0 0.05rem #ffffff1a;
+  --md-shadow-z2: 0 0.2rem 0.5rem #00000040, 0 0 0.05rem #ffffff59;
+  --md-shadow-z3: 0 0.5rem 2rem #00000066, 0 0 0.05rem #00000059;
+}
+
+[data-md-color-scheme^="bondad-"][data-md-color-scheme$="-light"] {
+  color-scheme: light;
+
+  --md-default-bg-color--light:      color-mix(in srgb, var(--bondad-bg) 70%, transparent);
+  --md-default-bg-color--lighter:    color-mix(in srgb, var(--bondad-bg) 30%, transparent);
+  --md-default-bg-color--lightest:   color-mix(in srgb, var(--bondad-bg) 12%, transparent);
+  --md-default-fg-color--lighter:    color-mix(in srgb, var(--bondad-fg) 32%, transparent);
+  --md-default-fg-color--lightest:   color-mix(in srgb, var(--bondad-fg) 7%, transparent);
+  --md-primary-bg-color--light:      color-mix(in srgb, var(--bondad-on-primary) 70%, transparent);
+  --md-accent-bg-color--light:       color-mix(in srgb, var(--bondad-on-primary) 70%, transparent);
+  /* Light-mode tints stay at 8% or below: the primary (#C0391F) is 5.1:1 on
+     the page but drops under 4.5:1 on a 10% tint (active nav item, links
+     inside admonitions). */
+  --md-accent-fg-color--transparent: color-mix(in srgb, var(--bondad-primary-light) 8%, transparent);
+  --md-code-hl-color:                var(--bondad-primary-light);
+  /* Opaque and lighter than the code surface: a translucent tint would
+     darken it and push strings and comments under 4.5:1. */
+  --md-code-hl-color--light:         color-mix(in srgb, var(--bondad-primary-light) 10%, #FFFFFF);
+  --bondad-admonition-tint:          8%;
+  --md-typeset-mark-color:           color-mix(in srgb, var(--bondad-primary-light) 18%, transparent);
+  --md-typeset-del-color:            color-mix(in srgb, var(--bondad-red) 15%, transparent);
+  --md-typeset-ins-color:            color-mix(in srgb, var(--bondad-green) 15%, transparent);
+  --md-typeset-table-color--light:   color-mix(in srgb, var(--bondad-fg) 3%, transparent);
+
+  --md-shadow-z1: 0 0.2rem 0.5rem #0000000d, 0 0 0.05rem #0000001a;
+  --md-shadow-z2: 0 0.2rem 0.5rem #0000001a, 0 0 0.05rem #00000040;
+  --md-shadow-z3: 0 0.2rem 0.5rem #00000033, 0 0 0.05rem #00000059;
+}
+
+[data-md-color-scheme^="bondad-"][data-md-color-scheme$="-dark"] img[src$="#only-light"],
+[data-md-color-scheme^="bondad-"][data-md-color-scheme$="-dark"] img[src$="#gh-light-mode-only"],
+[data-md-color-scheme^="bondad-"][data-md-color-scheme$="-light"] img[src$="#only-dark"],
+[data-md-color-scheme^="bondad-"][data-md-color-scheme$="-light"] img[src$="#gh-dark-mode-only"] {
+  display: none;
+}
+
+/* ============================================================ 3. Mapping */
+
+[data-md-color-scheme^="bondad-"] {
+  /* Brand */
+  --md-primary-fg-color:          var(--bondad-primary);
+  --md-primary-fg-color--light:   var(--bondad-primary-light);
+  --md-primary-fg-color--dark:    var(--bondad-primary-dark);
+  --md-primary-bg-color:          var(--bondad-on-primary);
+  --md-accent-fg-color:           var(--bondad-accent);
+  --md-accent-bg-color:           var(--bondad-on-primary);
+
+  /* Surfaces and text */
+  --md-default-bg-color:          var(--bondad-bg);
+  --md-default-fg-color:          var(--bondad-fg);
+  --md-default-fg-color--light:   var(--bondad-muted);
+  --md-typeset-color:             var(--bondad-text);
+  --md-typeset-a-color:           var(--bondad-primary);
+
+  /* Inline elements and tables */
+  --md-typeset-kbd-color:         var(--bondad-surface);
+  --md-typeset-kbd-accent-color:  var(--bondad-bg);
+  --md-typeset-kbd-border-color:  var(--bondad-border);
+  --md-typeset-table-color:       var(--bondad-border);
+
+  /* Admonitions (each type's hue is set in section 4) */
+  --md-admonition-fg-color:       var(--bondad-text);
+  --md-admonition-bg-color:       var(--bondad-bg);
+
+  /* Banners, e.g. the outdated-version notice */
+  --md-warning-fg-color:          #0E1116;
+  --md-warning-bg-color:          #FFB86B;
+
+  /* Code */
+  --md-code-fg-color:             var(--bondad-code-fg);
+  --md-code-bg-color:             var(--bondad-surface);
+  --md-code-bg-color--light:      color-mix(in srgb, var(--bondad-surface) 70%, transparent);
+  --md-code-bg-color--lighter:    color-mix(in srgb, var(--bondad-surface) 30%, transparent);
+  --md-code-hl-keyword-color:     var(--bondad-keyword);
+  --md-code-hl-string-color:      var(--bondad-green);
+  --md-code-hl-number-color:      var(--bondad-amber);
+  --md-code-hl-constant-color:    var(--bondad-amber);
+  --md-code-hl-special-color:     var(--bondad-special);
+  --md-code-hl-function-color:    var(--bondad-blue);
+  --md-code-hl-name-color:        var(--bondad-code-fg);
+  --md-code-hl-variable-color:    var(--bondad-violet);
+  --md-code-hl-generic-color:     var(--bondad-muted);
+  --md-code-hl-operator-color:    var(--bondad-muted);
+  --md-code-hl-punctuation-color: var(--bondad-muted);
+  --md-code-hl-comment-color:     var(--bondad-comment);
+
+  /* Footer (read by the classic variant; modern uses the default colours) */
+  --md-footer-fg-color:           #F2F4F8;
+  --md-footer-fg-color--light:    #9AA3B2;
+  --md-footer-fg-color--lighter:  #8A93A2;
+  --md-footer-bg-color:           var(--bondad-footer);
+  --md-footer-bg-color--dark:     var(--bondad-footer-dark);
+
+  /* Mermaid */
+  --md-mermaid-edge-color:        var(--bondad-muted);
+  --md-mermaid-node-bg-color:     var(--bondad-surface);
+  --md-mermaid-node-fg-color:     var(--bondad-primary);
+  --md-mermaid-label-bg-color:    var(--bondad-bg);
+  --md-mermaid-label-fg-color:    var(--bondad-text);
+  --md-mermaid-sequence-number-fg-color: var(--bondad-on-primary);
+
+  /* API docs (mkdocstrings) symbol badges */
+  --doc-symbol-parameter-fg-color:      var(--bondad-muted);
+  --doc-symbol-type_parameter-fg-color: var(--bondad-muted);
+  --doc-symbol-attribute-fg-color:      var(--bondad-amber);
+  --doc-symbol-function-fg-color:       var(--bondad-violet);
+  --doc-symbol-method-fg-color:         var(--bondad-violet);
+  --doc-symbol-class-fg-color:          var(--bondad-blue);
+  --doc-symbol-type_alias-fg-color:     var(--bondad-blue);
+  --doc-symbol-module-fg-color:         var(--bondad-green);
+}
+
+/* ========================================================= 4. Components */
+
+/* Headings and the header title in the strongest text colour, as `slate`
+   does for its own scheme. */
+[data-md-color-scheme^="bondad-"] .md-header__title,
+[data-md-color-scheme^="bondad-"] h1,
+[data-md-color-scheme^="bondad-"] h2,
+[data-md-color-scheme^="bondad-"] h3,
+[data-md-color-scheme^="bondad-"] h4,
+[data-md-color-scheme^="bondad-"] h5,
+[data-md-color-scheme^="bondad-"] h6 {
+  color: var(--bondad-fg);
+}
+
+/* Blog: the draft badge is hard-coded white on #ff1744 upstream. */
+[data-md-color-scheme^="bondad-"] .md-draft {
+  color: var(--bondad-on-primary);
+  background-color: var(--bondad-primary);
+}
+
+/* Admonitions and details: the modern layout (tinted box, coloured icon),
+   with each type's hue taken from the palette. */
+[data-md-color-scheme^="bondad-"] .md-typeset .admonition,
+[data-md-color-scheme^="bondad-"] .md-typeset details {
+  --bondad-admonition: var(--bondad-blue);
+  background-color: color-mix(in srgb, var(--bondad-admonition) var(--bondad-admonition-tint), transparent);
+}
+
+[data-md-color-scheme^="bondad-"] .md-typeset .admonition-title::before,
+[data-md-color-scheme^="bondad-"] .md-typeset summary::before {
+  background-color: var(--bondad-admonition);
+}
+
+[data-md-color-scheme^="bondad-"] .md-typeset .admonition-title::after,
+[data-md-color-scheme^="bondad-"] .md-typeset summary::after {
+  color: var(--bondad-admonition);
+}
+
+[data-md-color-scheme^="bondad-"] .md-typeset .note,
+[data-md-color-scheme^="bondad-"] .md-typeset .info,
+[data-md-color-scheme^="bondad-"] .md-typeset .todo {
+  --bondad-admonition: var(--bondad-blue);
+}
+[data-md-color-scheme^="bondad-"] .md-typeset .abstract,
+[data-md-color-scheme^="bondad-"] .md-typeset .summary,
+[data-md-color-scheme^="bondad-"] .md-typeset .tldr,
+[data-md-color-scheme^="bondad-"] .md-typeset .example {
+  --bondad-admonition: var(--bondad-violet);
+}
+[data-md-color-scheme^="bondad-"] .md-typeset .tip,
+[data-md-color-scheme^="bondad-"] .md-typeset .hint,
+[data-md-color-scheme^="bondad-"] .md-typeset .important,
+[data-md-color-scheme^="bondad-"] .md-typeset .success,
+[data-md-color-scheme^="bondad-"] .md-typeset .check,
+[data-md-color-scheme^="bondad-"] .md-typeset .done {
+  --bondad-admonition: var(--bondad-green);
+}
+[data-md-color-scheme^="bondad-"] .md-typeset .question,
+[data-md-color-scheme^="bondad-"] .md-typeset .help,
+[data-md-color-scheme^="bondad-"] .md-typeset .faq,
+[data-md-color-scheme^="bondad-"] .md-typeset .warning,
+[data-md-color-scheme^="bondad-"] .md-typeset .caution,
+[data-md-color-scheme^="bondad-"] .md-typeset .attention {
+  --bondad-admonition: var(--bondad-amber);
+}
+[data-md-color-scheme^="bondad-"] .md-typeset .failure,
+[data-md-color-scheme^="bondad-"] .md-typeset .fail,
+[data-md-color-scheme^="bondad-"] .md-typeset .missing,
+[data-md-color-scheme^="bondad-"] .md-typeset .danger,
+[data-md-color-scheme^="bondad-"] .md-typeset .error,
+[data-md-color-scheme^="bondad-"] .md-typeset .bug {
+  --bondad-admonition: var(--bondad-red);
+}
+[data-md-color-scheme^="bondad-"] .md-typeset .quote,
+[data-md-color-scheme^="bondad-"] .md-typeset .cite {
+  --bondad-admonition: var(--bondad-muted);
+}
